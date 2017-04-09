@@ -13,13 +13,13 @@ app.config(function($routeProvider){
 	.when('/edit/:id', {
 		controller: 'EditController',
 		templateUrl: 'views/edit.html'
-	
+
 	})
 	.otherwise({
 		redirectTo: '/'
 	});
 });
 
-app.constant("FBURL", 
-  "https://ang-crud.firebaseio.com/products/" //Use the URL of your project here
+app.constant("FBURL",
+  "https://medical-login.firebaseio.com/products/" //Use the URL of your project here
 );
