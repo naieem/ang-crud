@@ -1,34 +1,20 @@
 app.controller('LoginController', LoginController);
 
-LoginController.$inject = ["$scope", "$firebaseAuth", "$location"];
+LoginController.$inject = ["$rootScope", "$scope", "$firebaseAuth", "$location", "service"];
 
-function LoginController($scope,$firebaseAuth,$location){
-  // var products = new Firebase(FBURL);
-  // $scope.products = $firebaseArray(products);
-  //
-  // $scope.removeProduct = function(id) {
-  //   var ref = new Firebase(FBURL + id);
-  //   var product = $firebaseObject(ref)
-  //   product.$remove();
-  //  };
-  var auth = $firebaseAuth();
-  $scope.signIn = function() {
-    // auth.signInWithEmailAndPassword("hello@gmail.com", "123456")
-    // .then(function(res){
-    //   console.log(res);
-    //   $scope.email = res.email;
-    //   $scope.$digest();
-    // },
-    // function(error){
-    //   console.log(error);
-    // });
-    auth.$signInWithEmailAndPassword("hello@gmail.com", "123456").then(function(firebaseUser) {
-      console.log(firebaseUser);
-      console.log("Signed in as:", firebaseUser.uid);
-      $scope.email=firebaseUser.email;
-      $location.path('/list')
-    }).catch(function(error) {
-      console.error("Authentication failed:", error);
-    });
-  };
+function LoginController($rootScope, $scope, $firebaseAuth, $location, service) {
+  $scope.$on('setLoginStatus', function(event, data) {
+      $scope.status = data;
+      $scope.email = service.getEmail();
+  });
+    $scope.SignIn = function(event) {
+        event.preventDefault();
+        service.SignIn($scope.user).then(function(firebaseUser) {
+            service.setEmail(firebaseUser.email);
+            $rootScope.$broadcast('setLoginStatus', true);
+            $location.path('/list');
+        }).catch(function(error) {
+            console.error("Authentication failed:", error);
+        });
+    };
 };

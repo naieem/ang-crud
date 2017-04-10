@@ -1,4 +1,4 @@
-<form>
+<form ng-show="!status" ng-submit="SignIn($event)">
     <div class="form-group">
         <label for="email">Email:</label>
         <input type="email" class="form-control" id="email" placeholder="Enter email" ng-model="user.email">
@@ -7,15 +7,12 @@
         <label for="pwd">Password:</label>
         <input type="password" class="form-control" id="pwd" placeholder="Enter password" ng-model="user.password">
     </div>
-    <div class="checkbox">
+    <!-- <div class="checkbox">
         <label><input type="checkbox"> Remember me</label>
-    </div>
-    <button type="button" class="btn btn-default" ng-click="SignIn($event)">Submit</button>
+    </div> -->
+    <button type="submit" class="btn btn-default">Submit</button>
 </form>
 
-<div>
-    <button ng-click="signIn()">Sign In Anonymously</button>
-
-    <p>Signed in user: <strong>{{ email }}</strong></p>
-    <p ng-if="error">Error: <strong>{{ error }}</strong></p>
+<div ng-show="status">
+    <p>Welcome <strong>{{ email }}</strong></p>
 </div>

@@ -39,6 +39,13 @@
                 <ul class="nav navbar-nav">
                     <li><a href="#!/">Home</a></li>
                 </ul>
+                <ul class="nav navbar-nav navbar-right" ng-show="status" ng-controller="StatusController">
+                    <li><a href="#"><span class="glyphicon glyphicon-user"></span>{{email}}</a></li>
+                    <li><a href="#" ng-click="signOut($event)"><span class="glyphicon glyphicon-log-in"></span>SignOut</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right" ng-show="!status" ng-controller="StatusController">
+                    <li><a href="#!/login"><span class="glyphicon glyphicon-user"  ng-show="!status"></span>Login</a></li>
+                </ul>
             </div>
             <!--/.nav-collapse -->
         </div>
@@ -55,6 +62,7 @@
     <script src="js/app.js"></script>
     <script src="js/service/service.js"></script>
     <!-- Controllers -->
+    <script src="js/controllers/StatusController.js"></script>
     <script src="js/controllers/ListController.js"></script>
     <script src="js/controllers/AddController.js"></script>
     <script src="js/controllers/EditController.js"></script>

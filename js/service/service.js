@@ -1,16 +1,22 @@
 app.factory('service', service);
 
-service.$inject = ["$firebaseArray", "$firebaseObject"];
+service.$inject = ["$firebaseArray", "$firebaseObject", "$firebaseAuth"];
 
-function service($firebaseArray, $firebaseObject) {
+function service($firebaseArray, $firebaseObject, $firebaseAuth) {
+    var auth = $firebaseAuth();
     var ref = firebase.database().ref().child("products");
     var lists = $firebaseArray(ref);
+    var email = "";
     var service = {
         getList: getList,
         removeList: removeList,
         add: addList,
         update: updateList,
-        getById: getById
+        getById: getById,
+        SignIn: SignIn,
+        setEmail: setEmail,
+        getEmail: getEmail,
+        logout: logout
     };
     return service;
 
@@ -35,4 +41,17 @@ function service($firebaseArray, $firebaseObject) {
         var obj = ref.child(id);
         return $firebaseObject(obj);
     }
+    function SignIn(data) {
+        return auth.$signInWithEmailAndPassword(data.email, data.password);
+    }
+    function setEmail(em) {
+        email = em;
+    }
+    function getEmail() {
+        return email;
+    }
+    function logout() {
+      return auth.$signOut();
+    }
+
 }
