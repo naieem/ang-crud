@@ -1,19 +1,16 @@
-app.controller('EditController', ['$scope','$location', '$routeParams', '$firebaseObject', 'FBURL',   
-    function($scope, $location, $routeParams, $firebaseObject, FBURL){
-    
-    var ref = new Firebase(FBURL + $routeParams.id);
-		$scope.product = $firebaseObject(ref);
-    
-    $scope.editProduct = function() {
-        $scope.product.$save({
-            sku: $scope.product.sku,
-            description: $scope.product.description,
-            price: $scope.product.price
+app.controller('EditController', EditController);
+
+EditController.$inject = ['$scope', '$location', '$routeParams', 'service'];
+
+function EditController($scope, $location, $routeParams, service) {
+    $scope.product = service.getById($routeParams.id);
+    $scope.editProduct = function(data) {
+        service.update(data).then(function(res) {
+            console.log("updated");
+            $location.path('/list');
+        }, function(error) {
+            console.log(error);
         });
-        $scope.edit_form.$setPristine();
-        $scope.product = {};
-        $location.path('/products');
-        
     };
-     
-}]);
+
+}

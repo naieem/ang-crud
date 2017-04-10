@@ -1,16 +1,15 @@
-app.controller('AddController', ['$scope', '$firebaseArray', '$location', 'FBURL', function($scope, $firebaseArray, $location, FBURL){
-	
-	$scope.addProduct = function() {
-		var ref = new Firebase(FBURL);
-		var product = $firebaseArray(ref);
-		product.$add({
-			sku: $scope.product.sku,
-			description: $scope.product.description,
-			price: $scope.product.price
-		});
-		$location.path('/');
-	};
-	
-}]);
+app.controller('AddController', AddController);
 
+AddController.$inject = ['$scope', '$location', 'service'];
 
+function AddController($scope, $location, service) {
+    $scope.addProduct = function() {
+        service.add($scope.product).then(function(res) {
+            console.log("added");
+            $location.path('/list');
+        }, function(error) {
+            console.log(error);
+        });
+    };
+
+};

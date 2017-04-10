@@ -1,14 +1,14 @@
-app.controller('ListController', ['$scope', '$firebaseArray', '$firebaseObject', 'FBURL', function($scope, $firebaseArray, $firebaseObject, FBURL){
-  
-  var products = new Firebase(FBURL);
-  $scope.products = $firebaseArray(products);
-  
-  $scope.removeProduct = function(id) {
-    var ref = new Firebase(FBURL + id);
-    var product = $firebaseObject(ref)
-    product.$remove();
-   };
-   
-}]);
+app.controller('ListController', ListController);
 
- 
+ListController.$inject = ['$scope', 'service'];
+
+function ListController($scope, service) {
+    $scope.products = service.getList();
+    $scope.removeProduct = function(data) {
+        service.removeList(data).then(function() {
+            console.log("hello");
+        }, function(error) {
+            console.log(error);
+        });
+    };
+};
