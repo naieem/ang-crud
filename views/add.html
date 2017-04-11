@@ -2,23 +2,42 @@
 
 <form class="form-horizontal" role="form">
     <div class="form-group">
-        <label for="sku" class="col-sm-2 control-label">SKU:</label>
+        <label for="sku" class="col-sm-2 control-label">Place:</label>
         <div class="col-sm-4">
-            <input class="form-control" id="sku" ng-model="product.sku" placeholder="SKU" />
+            <input class="form-control" ng-model="product.place" placeholder="Place" />
         </div>
     </div>
 
     <div class="form-group">
-        <label for="description" class="col-sm-2 control-label">Description:</label>
+        <label for="sku" class="col-sm-2 control-label">Date:</label>
         <div class="col-sm-4">
-            <input class="form-control" id="description" ng-model="product.description" placeholder="DESCRIPTION" />
+            <input class="form-control" type="date" ng-model="product.fulldate" placeholder="Date" />
         </div>
     </div>
 
     <div class="form-group">
-        <label for="Price" class="col-sm-2 control-label">Price:</label>
+        <label for="sku" class="col-sm-2 control-label">Schedule:</label>
         <div class="col-sm-4">
-            <input class="form-control" id="price" type="number" min=�0? step="any" ng-model="product.price" placeholder="9.99" />
+            <select ng-model="product.schedule">
+              <option value="Morning">Morning</option>
+              <option value="Evening">Evening</option>
+              <option value="Night">Night</option>
+              <option value="OT">OT</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="description" class="col-sm-2 control-label">Provider:</label>
+        <div class="col-sm-4">
+            <input class="form-control" ng-model="product.provider" placeholder="Provider" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="Price" class="col-sm-2 control-label">Amount:</label>
+        <div class="col-sm-4">
+            <input class="form-control" type="number" min=�0? step="any" ng-model="product.amount" placeholder="9.99" />
         </div>
     </div>
 

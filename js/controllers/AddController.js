@@ -4,12 +4,14 @@ AddController.$inject = ['$scope', '$location', 'service'];
 
 function AddController($scope, $location, service) {
     $scope.addProduct = function() {
-        service.add($scope.product).then(function(res) {
-            console.log("added");
-            $location.path('/list');
-        }, function(error) {
-            console.log(error);
-        });
+      var x=new Date($scope.product.fulldate);
+      console.log(x.toString());
+        // service.add($scope.product).then(function(res) {
+        //     console.log("added");
+        //     $location.path('/list');
+        // }, function(error) {
+        //     console.log(error);
+        // });
     };
 
 };

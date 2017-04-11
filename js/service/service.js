@@ -4,7 +4,7 @@ service.$inject = ["$firebaseArray", "$firebaseObject", "$firebaseAuth"];
 
 function service($firebaseArray, $firebaseObject, $firebaseAuth) {
     var auth = $firebaseAuth();
-    var ref = firebase.database().ref().child("products");
+    var ref = firebase.database().ref();
     var lists = $firebaseArray(ref);
     var email = "";
     var service = {
