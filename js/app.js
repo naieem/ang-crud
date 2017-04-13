@@ -1,4 +1,4 @@
-var app = angular.module('myApp', ['ngRoute', 'firebase','ng-bootstrap-datepicker']);
+var app = angular.module('myApp', ['ngRoute', 'firebase']);
 
 app.config(function($routeProvider) {
     var config = {
